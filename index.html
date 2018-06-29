@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Portfolio | Alia Wilkinson</title>
-	<meta name="description" content="Onepage Parallax Site" />
+	<meta name="description" content="Onepage Parallax Alia Portfolio" />
 	<meta name="keywords" content="onepage, parallax" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.min.css" />
@@ -32,6 +32,9 @@
 	<div class="ext-nav background-95-h page-transition">
 		<div class="view half-height">
 			<img alt class="bg static" src="images/placeholders/1920x1200-2.jpg" />
+			<video autoplay loop id="video-background" muted plays-inline>
+				<source src="images/bg/lightbulbs.mp4" type="video/mp4">
+			</video>
 			<div class="content no-top-padding no-bottom-padding  full-height">
 				<div class="container-fluid  full-height">
 					<div class="row full-height">
@@ -82,13 +85,8 @@
 	<div class="page-border left colors-e background-solid">
 		<ul>
 			<li>
-				<a href="https://www.facebook.com/" target="_blank">
-					<i class="fa fa-facebook"></i>
-				</a>
-			</li>
-			<li>
-				<a href="https://twitter.com/" target="_blank">
-					<i class="fa fa-twitter"></i>
+				<a href="https://www.linkedin.com/in/aliawilkinson/" target="_blank">
+					<i class="fa fa-linkedin"></i>
 				</a>
 			</li>
 			<li>
@@ -264,8 +262,7 @@
 		</ul>
 	</div>
 	<!-- BEGIN: Page content -->
-	<div class="video-bg" data-video="http://www.x40.ru/templates/video/Mazwai/Phil_Fried-ElectricBulb.mp4" data-mute="yes" data-volume="50"
-	 data-alternative="images/placeholders/1920x1200-0.jpg"></div>
+	<div class="video-bg" data-video="/images/bg/lightbulbs.mp4" data-mute="yes" data-volume="50" data-alternative="images/placeholders/1920x1200-0.jpg"></div>
 	<section id="home">
 		<div class="view">
 			<div class="content home-suzi full-size colors-c background-40">
@@ -1280,13 +1277,13 @@
 											<div class="col-md-6 control-group">
 												<div class="alt-placeholder">Name</div>
 												<input type="text" name="your-name" value="" size="40" placeholder="Name" data-validation-required-message="Please fill the required field."
-												 required>
+												    required>
 												<div class="help-block"></div>
 											</div>
 											<div class="col-md-6 control-group">
 												<div class="alt-placeholder">Email</div>
 												<input type="email" name="your-email" value="" size="40" placeholder="Email" data-validation-required-message="Please fill the required field."
-												 required>
+												    required>
 												<div class="help-block"></div>
 											</div>
 											<div class="col-md-12 control-group">
@@ -1457,7 +1454,8 @@
 				var ua = navigator.userAgent.toLowerCase();
 				var isChrome = ua.indexOf('chrome') > -1;
 				if (isChrome) $('html').addClass('chrome');
-				var isAndroidBrowser4_3minus = ((ua.indexOf('mozilla/5.0') > -1 && ua.indexOf('android ') > -1 && ua.indexOf('applewebkit') > -1) && !(ua.indexOf('chrome') > -1));
+				var isAndroidBrowser4_3minus = ((ua.indexOf('mozilla/5.0') > -1 && ua.indexOf('android ') > -1 && ua.indexOf(
+					'applewebkit') > -1) && !(ua.indexOf('chrome') > -1));
 				if (isAndroidBrowser4_3minus) $('html').addClass('android-browser-4_3minus');
 				var isSafari = !isChrome && ua.indexOf('safari') !== -1;
 				if (isSafari) $('html').addClass('safari');
@@ -1465,8 +1463,7 @@
 				if (isMobile) {
 					$('html').addClass('mobile');
 					if (disableMobileAnimations) $('html').addClass('poor-browser');
-				}
-				else {
+				} else {
 					$('html').addClass('non-mobile');
 				}
 				if (isWin && isSafari) {
