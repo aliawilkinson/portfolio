@@ -25,20 +25,20 @@
 // =============================================================================
 
 require_once "Mail.php";
-// Change this options:
-$username = 'user@gmail.com';
-$password = 'password';
+// Change these options:
+$username = 'aliawilkinson@gmail.com';
+$password = 'HFmeParV!NT1';
 $smtpHost = 'ssl://smtp.gmail.com';
 $smtpPort = '465';
-$to = 'user@gmail.com';
-$from = 'user@gmail.com';
+$to = 'aliawilkinson@gmail.com';
+$from = 'aliawilkinson@gmail.com';
 
 $subject = 'Contact Form';
 $successMessage = 'Message successfully sent!';
 
-$replyTo = $_POST['your-email'];
-$name = $_POST['your-name'];
-$body = $_POST['your-message'];
+$replyTo = $_POST['aliawilkinson@gmail.com'];
+$name = $_POST['Alia'];
+$body = $_POST['Hello World!'];
 
 $headers = array(
 	'From' => $name . " <" . $from . ">",

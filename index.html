@@ -158,7 +158,7 @@
 		</div>
 		<div class="overlay-view">
 			<div class="content-container">
-				<h3>Credits</h3>
+				<!-- <h3>Credits</h3>
 				<ul>
 					<li>
 						Photos by:
@@ -178,8 +178,8 @@
 							<li>
 								<a target="_blank" href="https://www.flickr.com/photos/johny/">John Kraus</a>,
 								<a target="_blank" href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 License</a>
-							</li>
-							<li>
+							</li> -->
+				<!-- <li>
 								<a target="_blank" href="https://www.flickr.com/photos/geishaboy500/">THOR</a>,
 								<a target="_blank" href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 License</a>
 							</li>
@@ -198,28 +198,28 @@
 							<li>
 								<a target="_blank" href="http://picjumbo.com/">Picjumbo</a>,
 								<a target="_blank" href="http://picjumbo.com/about-author/">Picjumbo License</a>
-							</li>
-						</ul>
+							</li> -->
+				<!-- </ul>
 					</li>
-					<li>
-						Video by:
+					<li> -->
+				<!-- Video by:
 						<ul>
 							<li>
 								<a target="_blank" href="http://mazwai.com/">Mazwai</a>,
 								<a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0 License</a>
 							</li>
-						</ul>
-					</li>
-					<li>
-						Icons by:
+						</ul> -->
+				<!-- </li> -->
+				<!-- <li> -->
+				<!-- Icons by:
 						<ul>
 							<li>
 								<a target="_blank" href="http://designmodo.com/">Designmodoh</a>,
 								<a target="_blank" href="http://designmodo.com/linecons-free/">License</a>
 							</li>
-						</ul>
-					</li>
-				</ul>
+						</ul> -->
+				<!-- </li> -->
+				<!-- </ul> -->
 			</div>
 		</div>
 	</div>
@@ -1349,14 +1349,31 @@
 								<div class="text-right scroll-in-animation" data-animation="fadeInLeft">
 									<p class="big-font uppercase">
 										Tel:
-										<strong class="highlight">+1 (619) 279-6733</strong>
+										<strong class="highlight">
+											<script>
+												function revealPhoneNum() {
+													var el = document.querySelector(".phone-button");
+													el.outerHTML = '<a href = "tel:+16192796733"> +1(619) 279 - 6733 </a>';
+												}
+
+												function revealEmail() {
+													var el = document.querySelector(".email-button");
+													el.outerHTML = '<a href="mailto:aliawilkinson@gmail.com">aliawilkinson@gmail.com</a>';
+												}
+											</script>
+											<button onClick="revealPhoneNum()" class="phone-button">
+												<span style="color: black; font-weight: 200">Click to display phone number</span>
+											</button>
+										</strong>
 									</p>
 									<p class="big-font uppercase">
 										<br/> Irvine, CA, United States
 									</p>
 									<p class="big-font">
 										<b>
-											<a href="mailto:aliawilkinson@gmail.com">aliawilkinson@gmail.com</a>
+											<button onClick="revealEmail()" class="email-button">
+												<span style="color: black; font-weight: 200">Click to display email</span>
+											</button>
 											<br/>
 											<a target="blank" href="http://www.aliawilkinson.com">www.aliawilkinson.com</a>
 										</b>
