@@ -26,6 +26,7 @@
 	<link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120x120.png" />
 	<link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144x144.png" />
 	<link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152x152.png" />
+	<script src="./scripts/alia-custom-script.js"></script>
 </head>
 
 <body class="state1 background-100-e">
@@ -1350,17 +1351,6 @@
 									<p class="big-font uppercase">
 										Tel:
 										<strong class="highlight">
-											<script>
-												function revealPhoneNum() {
-													var el = document.querySelector(".phone-button");
-													el.outerHTML = '<a href = "tel:+16192796733"> +1(619) 279 - 6733 </a>';
-												}
-
-												function revealEmail() {
-													var el = document.querySelector(".email-button");
-													el.outerHTML = '<a href="mailto:aliawilkinson@gmail.com">aliawilkinson@gmail.com</a>';
-												}
-											</script>
 											<button onClick="revealPhoneNum()" class="phone-button">
 												<span style="color: black; font-weight: 200">Click to display phone number</span>
 											</button>
