@@ -1,64 +1,55 @@
 <?php
-// PHP extensions Mail and Net_SMTP must be installed. If they are not already
-// installed, install them by PEAR:
-// > pear install Mail
-// > pear install Net_SMTP
-// SSL must be allowed. On Windows you should uncomment line in php.ini:
-//		extension=php_openssl.dll
-// If you use smtp.gmail.com as smpt host then use:
-//		https://accounts.google.com/DisplayUnlockCaptcha
-// and allow access for less secure apps:
-//		https://www.google.com/settings/security/lesssecureapps
-//		
-// =============================================================================
-// NOTES
-// contact.php – is a script for a web servers with php support.
-// Extensions which required for this script are often installed by default.
-// If they are not already installed, the easiest way to do this using PEAR.
-// Learn more about PEAR http://pear.php.net/.
-// Editing the php.ini required only on Windows. On other operating systems this
-// is usually not required. Location of this file depends on settings of web
-// server.
-// Also, your web server should not be denied access to external mail servers.
-// On the majority of paid and on many free hostings (eg OpenShift:
-// https://www.openshift.com/) all these features are available. 
-// =============================================================================
+ob_start();
+require_once('php_mailer/email_config.php');
+require('php_mailer/phpmailer/PHPMailer/PHPMailerAutoload.php');
+print_r($_POST);
+$mail = new PHPMailer;
+$mail->SMTPDebug = 0;           // Enable verbose debug output. Change to 0 to disable debugging output.
 
-require_once "Mail.php";
-// Change these options:
-$username = 'aliawilkinson@gmail.com';
-$password = 'HFmeParV!NT1';
-$smtpHost = 'ssl://smtp.gmail.com';
-$smtpPort = '465';
-$to = 'aliawilkinson@gmail.com';
-$from = 'aliawilkinson@gmail.com';
+$mail->isSMTP();                // Set mailer to use SMTP.
+$mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers.
+$mail->SMTPAuth = true;         // Enable SMTP authentication
 
-$subject = 'Contact Form';
-$successMessage = 'Message successfully sent!';
 
-$replyTo = $_POST['aliawilkinson@gmail.com'];
-$name = $_POST['Alia'];
-$body = $_POST['Hello World!'];
-
-$headers = array(
-	'From' => $name . " <" . $from . ">",
-	'Reply-To' => $name . " <" . $replyTo . ">",
-	'To' => $to,
-	'Subject' => $subject
+$mail->Username = EMAIL_USER;   // SMTP username
+$mail->Password = EMAIL_PASS;   // SMTP password
+$mail->SMTPSecure = 'tls';      // Enable TLS encryption, `ssl` also accepted, but TLS is a newer more-secure encryption
+$mail->Port = 587;              // TCP port to connect to gmail (normal port)
+$options = array(
+    'ssl' => array(
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+    )
 );
-$smtp = Mail::factory('smtp', array(
-			'host' => $smtpHost,
-			'port' => $smtpPort,
-			'auth' => true,
-			'username' => $username,
-			'password' => $password
-		));
+$mail->smtpConnect($options);
+$mail->From = 'aliawilkinsondev@gmail.com';  // sender's email address (shows in "From" field) //new fake email
+$mail->FromName = 'alia mailer daemon';   // sender's name (shows in "From" field)
+$mail->addAddress('aliawilkinson@gmail.com', 'og alia');  // Add a recipient, my real email address $mail->addAddress('aliawilkinson@gmail.com', 'Alia Wilkinson');
+//$mail->addAddress('ellen@example.com');                        // Name is optional
+$mail->addReplyTo($_POST['your-email']);                          // Add a reply-to address
+//$mail->addCC('cc@example.com');
+//$mail->addBCC('bcc@example.com');
 
-$mail = $smtp->send($to, $headers, $body);
+//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+$mail->isHTML(true);                                  // Set email format to HTML
 
-if (PEAR::isError($mail)) {
-	echo($mail->getMessage());
+$mail->Subject = 'contact form email from aliawilkinson.com';
+$mail->Body    = "Message for you, mistress: 
+    <br> name: {$_POST['your-name']}
+    <br> email: {$_POST['your-email']} 
+    <br> message: ".nl2br($_POST['your-message']);
+$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+// ^ goes to my email 
+$message = '';
+if(!$mail->send()) {
+    $message = 'Message could not be sent. Please contact Alia through linkedin.';
+    // $message .= $mail->ErrorInfo;
 } else {
-	echo($successMessage);
+    $message = 'Message has been sent';
 }
+ob_end_clean();
+
+print($message);
 ?>
