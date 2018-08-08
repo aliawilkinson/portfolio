@@ -6,5 +6,5 @@ function revealPhoneNum() {
 
 function revealEmail() {
     var el = document.querySelector(".email-button");
-    el.outerHTML = '<a href="mailto:aliawilkinson@gmail.com">aliawilkinson@gmail.com</a>';
+    el.outerHTML = '<a href="mailto:aliawilkinsondev@gmail.com">aliawilkinsondev@gmail.com</a>';
 }
