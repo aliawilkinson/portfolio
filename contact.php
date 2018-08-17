@@ -1,15 +1,24 @@
 <?php
 ob_start();
+
+// $validatedInput = [];
+// $validatedInput['name'] = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+// if(empty($validatedInput['name'])){
+//     http_response_code(422);
+//     print('Invalid name');
+//     exit();
+// }
+
+
+
 require_once('php_mailer/email_config.php');
 require('php_mailer/phpmailer/PHPMailer/PHPMailerAutoload.php');
-print_r($_POST);
 $mail = new PHPMailer;
 $mail->SMTPDebug = 0;           // Enable verbose debug output. Change to 0 to disable debugging output.
 
 $mail->isSMTP();                // Set mailer to use SMTP.
 $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers.
 $mail->SMTPAuth = true;         // Enable SMTP authentication
-
 
 $mail->Username = EMAIL_USER;   // SMTP username
 $mail->Password = EMAIL_PASS;   // SMTP password
