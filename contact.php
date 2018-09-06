@@ -65,13 +65,13 @@ $mail->addReplyTo($message['email'], $message['name']);          // Add a reply-
 $mail->isHTML(true);                                  // Set email format to HTML
 
 $mail->Subject = $message['name'].' has sent you a message from your portfolio site';
-$mail->Body    = "email: {$message['email']}";
+$mail->Body    = "email: {$message['email']}<br/><br/>".
                     nl2br($message['message']);
 $mail->AltBody = htmlentities($message['message']);
 
 $message = '';
 if(!$mail->send()) {
-    $message = 'Message could not be sent. Please click the email button to the left to contact Alia.';
+    $message = 'Message could not be sent. Please click the email button to contact Alia.';
 } else {
     $message = 'Message has been sent';
 }
