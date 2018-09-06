@@ -1,14 +1,6 @@
 <?php
 ob_start();
 
-// $validatedInput = [];
-// $validatedInput['name'] = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
-// if(empty($validatedInput['name'])){
-//     http_response_code(422);
-//     print('Invalid name');
-//     exit();
-// }
-
 
 
 require_once('php_mailer/email_config.php');
@@ -49,12 +41,11 @@ $mail->Body    = "Message for you, mistress:
     <br> name: {$_POST['your-name']}
     <br> email: {$_POST['your-email']} 
     <br> message: ".nl2br($_POST['your-message']);
-$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-// ^ goes to my email 
+$mail->AltBody = htmlentities($_POST['your-message']);
+
 $message = '';
 if(!$mail->send()) {
     $message = 'Message could not be sent. Please contact Alia through linkedin.';
-    // $message .= $mail->ErrorInfo;
 } else {
     $message = 'Message has been sent';
 }
