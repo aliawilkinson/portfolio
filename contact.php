@@ -1,7 +1,9 @@
 <?php
+ob_start();
 
 require_once('php_mailer/email_config.php');
 require('php_mailer/phpmailer/PHPMailer/PHPMailerAutoload.php');
+
 $message = [];
 $output = [
     'success' => null,
@@ -80,6 +82,8 @@ if(!$mail->send()) {
 } else {
     $message = 'Message has been sent';
 }
+
+ob_end_clean();
 
 print($message);
 ?>
