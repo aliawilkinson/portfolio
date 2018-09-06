@@ -1,5 +1,4 @@
 <?php
-ob_start();
 
 require_once('php_mailer/email_config.php');
 require('php_mailer/phpmailer/PHPMailer/PHPMailerAutoload.php');
@@ -69,20 +68,18 @@ $mail->Body    = $message['message'];
 $mail->AltBody = htmlentities($message['message']);
 
 $message = '';
-if(!$mail->send()) {
-    $output['success'] = false;
-    $output['message'][] = $mail->ErrorInfo;
-} else {
-    $output['success'] = true;
-}
-echo json_encode($output);
 // if(!$mail->send()) {
-//     $message = 'Message could not be sent. Please contact Alia through linkedin.';
-//     // $message .= $mail->ErrorInfo;
+//     $output['success'] = false;
+//     $output['message'][] = $mail->ErrorInfo;
 // } else {
-//     $message = 'Message has been sent';
+//     $output['success'] = true;
 // }
-// ob_end_clean();
+// echo json_encode($output);
+if(!$mail->send()) {
+    $message = 'Message could not be sent. Please contact Alia through linkedin.';
+} else {
+    $message = 'Message has been sent';
+}
 
 // print($message);
 ?>
