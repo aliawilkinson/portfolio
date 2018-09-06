@@ -1,10 +1,38 @@
 <?php
 ob_start();
 
-
-
 require_once('php_mailer/email_config.php');
 require('php_mailer/phpmailer/PHPMailer/PHPMailerAutoload.php');
+
+$message = [];
+$output = [
+    'success' => null,
+    'messages' => []
+];
+//sanitize name field
+$message['name'] = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+if(empty($message['name'])) {
+    $output['success'] = false;
+    $output['messages'][] = 'missing name key';
+}
+//validate email field
+$message['email'] = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+if(empty($message['email'])) {
+    $output['success'] = false;
+    $output['messages'][] = 'invalid email key';
+}
+//sanitize message
+$message['message'] = filter_var($_POST['message'], FILTER_SANITIZE_STRING);
+if(empty($message['message'])) {
+    $output['success'] = false;
+    $output['messages'][] = 'missing message key';
+}
+
+if ($output['success'] !== null) {
+    http_response_code(422);        //data sent in body was incorrect format, unprocessable entity
+    echo json_encode($output);
+    exit();
+}
 $mail = new PHPMailer;
 $mail->SMTPDebug = 0;           // Enable verbose debug output. Change to 0 to disable debugging output.
 
@@ -24,11 +52,11 @@ $options = array(
     )
 );
 $mail->smtpConnect($options);
-$mail->From = 'aliawilkinsondev@gmail.com';  // sender's email address (shows in "From" field) //new fake email
-$mail->FromName = 'alia mailer daemon';   // sender's name (shows in "From" field)
-$mail->addAddress('aliawilkinson@gmail.com', 'og alia');  // Add a recipient, my real email address $mail->addAddress('aliawilkinson@gmail.com', 'Alia Wilkinson');
+$mail->From = $message['email'];  // sender's email address (shows in "From" field)
+$mail->FromName = $message['name'];   // sender's name (shows in "From" field)
+$mail->addAddress(EMAIL_TO_ADDRESS, EMAIL_USERNAME);  // Add a recipient, my real email address $mail->addAddress('aliawilkinson@gmail.com', 'Alia Wilkinson');
 //$mail->addAddress('ellen@example.com');                        // Name is optional
-$mail->addReplyTo($_POST['your-email']);                          // Add a reply-to address
+$mail->addReplyTo($message['email'], $message['name']);          // Add a reply-to address
 //$mail->addCC('cc@example.com');
 //$mail->addBCC('bcc@example.com');
 
@@ -36,11 +64,9 @@ $mail->addReplyTo($_POST['your-email']);                          // Add a reply
 //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 $mail->isHTML(true);                                  // Set email format to HTML
 
-$mail->Subject = 'contact form email from aliawilkinson.com';
-$mail->Body    = "Message for you, mistress: 
-    <br> name: {$_POST['your-name']}
-    <br> email: {$_POST['your-email']} 
-    <br> message: ".nl2br($_POST['your-message']);
+$mail->Subject = $_POST['your-name'].' has sent you a message from your portfolio site';
+$mail->Body    = "email: {$_POST['your-email']}";
+                    nl2br($_POST['your-message']);
 $mail->AltBody = htmlentities($_POST['your-message']);
 
 $message = '';
@@ -49,6 +75,7 @@ if(!$mail->send()) {
 } else {
     $message = 'Message has been sent';
 }
+
 ob_end_clean();
 
 print($message);
