@@ -81,5 +81,5 @@ if(!$mail->send()) {
     $message = 'Message has been sent';
 }
 
-// print($message);
+print($message);
 ?>
