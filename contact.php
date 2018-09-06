@@ -64,14 +64,14 @@ $mail->addReplyTo($message['email'], $message['name']);          // Add a reply-
 //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 $mail->isHTML(true);                                  // Set email format to HTML
 
-$mail->Subject = $_POST['your-name'].' has sent you a message from your portfolio site';
-$mail->Body    = "email: {$_POST['your-email']}";
-                    nl2br($_POST['your-message']);
-$mail->AltBody = htmlentities($_POST['your-message']);
+$mail->Subject = $message['name'].' has sent you a message from your portfolio site';
+$mail->Body    = "email: {$message['email']}";
+                    nl2br($message['message']);
+$mail->AltBody = htmlentities($message['message']);
 
 $message = '';
 if(!$mail->send()) {
-    $message = 'Message could not be sent. Please contact Alia through linkedin.';
+    $message = 'Message could not be sent. Please click the email button to the left to contact Alia.';
 } else {
     $message = 'Message has been sent';
 }
