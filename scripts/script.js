@@ -189,14 +189,14 @@ $(function () {
 				var $this = $(this);
 				var $overlay = $($this.data('overlay-window'));
 				var overlayWindow = new OverlayWindow($overlay);
-				if (e.keyCode == 27) {
-					// Close the modal/menu
-					console.log('knows escape key');
-					// overlayWindow.closeElement();
+				// if (e.keyCode == 27) {
+				// 	// Close the modal/menu
+				// 	console.log('knows escape key');
+				// 	// overlayWindow.closeElement();
 
-					//  Return focus to the element that invoked it 
-					$('a[href=#work]').focus();
-				}
+				// 	//  Return focus to the element that invoked it 
+				// 	$('a[href=#work]').focus();
+				// }
 				$this.click(function (e) {
 					e.preventDefault();
 					overlayWindow.show();
